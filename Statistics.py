@@ -1,21 +1,42 @@
 # Khai báo thư viện để sử dụng các hàm thống
-# kê liên quan đến phân phối Poisson và Nhị thức
+# kê liên quan đến phân phối Chuẩn và Nhị thức
 
-from scipy.stats import poisson, binom
+'''
+Xác suất xuất hiện mặt ngửa của một đồng xu không cân đối là 0.45
+Tung đồng xu 200 lần.
+Tính xác suất
+    a) có đúng 150 lần xuất hiện mặt ngửa.
+    b) Có từ 30 đến 45 lần xuất hiện mặt ngửa
+'''
+# Gọi X là số lần xuất hiện mặt ngửa, thì X ~ B(200;0.45)
+# Let's go...
 
-# Tạo ngẫu nhiên mẫu có phân phối Poisson, Nhị thức
-ps = poisson(0.75).rvs(80)
-bn = binom(10,0.7).rvs(50)
+from scipy.stats import binom, norm
 
-print("Poisson:",ps)
-print("Binomial",bn)
+# Tính câu a)
 
-print(type(bn))
-print(type(ps))
+B = binom(200,0.45)
+f= B.pmf(150)
+# Có thể viết gộp thành 1 dòng:
+f2 = binom.pmf(150,200,0.45)
+
+print('a)',f)
+print('or a)',f2)
 
 
-for i in range(10):
-  print(f'Xác suất để X = {i} là ',binom(8,0.6).pmf(i))
+# Tính chính xác câu b)
 
-for i in range(10):
-  print(f'Xác suất để X = {i} là ',poisson(0.75).pmf(i))
+S = 0
+for i in range(30,46):
+  S = S + B.pmf(i)
+
+print('b)',S)
+
+# Bây giờ xấp xỉ câu b)
+# X ~ N(90;49.5)
+
+
+# Giả sử Mean = 20  và Standard Deviation = 2.64575
+g = norm.cdf(45,90,49.5**0.5) - norm.cdf(30,90,49.5**0.5)
+
+print(g)
