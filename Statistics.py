@@ -1,42 +1,35 @@
+# OK
 # Khai báo thư viện để sử dụng các hàm thống
 # kê liên quan đến phân phối Chuẩn và Nhị thức
 
 '''
-Xác suất xuất hiện mặt ngửa của một đồng xu không cân đối là 0.45
-Tung đồng xu 200 lần.
+Xác suất nảy mầm của mỗi hạt giống là 0.8
+Gieo thử 500 hạt.
 Tính xác suất
-    a) có đúng 150 lần xuất hiện mặt ngửa.
-    b) Có từ 30 đến 45 lần xuất hiện mặt ngửa
+    a) có đúng 375 hạt nảy mầm.
+    b) Có từ 390 đến 450 hạt nảy mầm.
 '''
-# Gọi X là số lần xuất hiện mặt ngửa, thì X ~ B(200;0.45)
+# Gọi X là số lần xuất hiện mặt ngửa, thì X ~ B(500;0.8)
 # Let's go...
 
 from scipy.stats import binom, norm
 
-# Tính câu a)
 
-B = binom(200,0.45)
-f= B.pmf(150)
+B = binom(500,0.8)
+f= B.pmf(375)
 # Có thể viết gộp thành 1 dòng:
-f2 = binom.pmf(150,200,0.45)
+# B = binom.pmf(25,200,0.45)
 
 print('a)',f)
-print('or a)',f2)
-
-
-# Tính chính xác câu b)
 
 S = 0
-for i in range(30,46):
+for i in range(390,451):
   S = S + B.pmf(i)
 
 print('b)',S)
 
-# Bây giờ xấp xỉ câu b)
-# X ~ N(90;49.5)
+# Bây giờ xấp xỉ X ~ N(400;80)
 
-
-# Giả sử Mean = 20  và Standard Deviation = 2.64575
-g = norm.cdf(45,90,49.5**0.5) - norm.cdf(30,90,49.5**0.5)
+g = norm.cdf(5.59)-norm.cdf(-1.12)
 
 print(g)
