@@ -162,6 +162,6 @@ If the interaction term (`Current_Grade:Study_Technique`) is not significant, th
 ---
 
 ## License
-This project is open-source and available under the Sơn Võ.
+This project is open-source and available under Sơn Võ.
 
 ---
